@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sistema Fazenda</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <h1>Sistema Fazenda (Simples)</h1>
+
+  <h2>Estoque</h2>
+  <input id="estoqueInput" placeholder="Adicionar kg">
+  <button onclick="addEstoque()">Adicionar</button>
+  <p id="estoque">0 kg</p>
+
+  <h2>Lote</h2>
+  <input id="peso" placeholder="Peso inicial">
+  <input id="gmd" placeholder="GMD">
+  <button onclick="criarLote()">Criar lote</button>
+
+  <h3>Controle</h3>
+  <button onclick="registrarDia()">Registrar dia</button>
+  <p id="info"></p>
+
+<script>
+let estoque = 0;
+let lote = null;
+
+function addEstoque(){
+  let val = Number(document.getElementById("estoqueInput").value);
+  estoque += val;
+  document.getElementById("estoque").innerText = estoque + " kg";
+}
+
+function criarLote(){
+  lote = {
+    peso: Number(document.getElementById("peso").value),
+    gmd: Number(document.getElementById("gmd").value),
+    consumo: 0,
+    dias: 0
+  };
+}
+
+function registrarDia(){
+  let consumo = Number(prompt("Consumo kg:"));
+  estoque -= consumo;
+  lote.consumo += consumo;
+  lote.peso += lote.gmd;
+  lote.dias++;
+
+  document.getElementById("estoque").innerText = estoque + " kg";
+
+  document.getElementById("info").innerText =
+    "Peso: " + lote.peso.toFixed(2) +
+    " | Dias: " + lote.dias +
+    " | Consumo: " + lote.consumo;
+}
+</script>
+</body>
+</html>
